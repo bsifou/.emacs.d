@@ -87,6 +87,8 @@
   (define-key inferior-js-minor-mode-map "\C-x\C-e" 'js-send-last-sexp)
   (define-key inferior-js-minor-mode-map "\C-cb" 'js-send-buffer)
 
+
+
   (define-minor-mode inferior-js-keys-mode
     "Bindings for communicating with an inferior js interpreter."
     nil " InfJS" inferior-js-minor-mode-map)

@@ -70,7 +70,8 @@
 (when (maybe-require-package 'beacon)
   (setq-default beacon-lighter "")
   (setq-default beacon-size 20)
-  (add-hook 'after-init-hook 'beacon-mode))
+                                        ;(add-hook 'after-init-hook 'beacon-mode)
+  )
 
 
 
@@ -110,12 +111,13 @@
 (when (boundp 'display-fill-column-indicator)
   (setq-default indicate-buffer-boundaries 'left)
   (setq-default display-fill-column-indicator-character ?\u254e)
-  (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode))
+                                        ;(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+  )
 
 
 
-(when (require-package 'rainbow-delimiters)
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+;; (when (require-package 'rainbow-delimiters)
+;;   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 
 (when (maybe-require-package 'symbol-overlay)
@@ -307,6 +309,7 @@ ORIG is the advised function, which is called with its ARGS."
     (apply orig args)))
 
 (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
+
 
 
 (provide 'init-editing-utils)
