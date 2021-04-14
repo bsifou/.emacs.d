@@ -55,7 +55,7 @@
 
 (require 'init-frame-hooks)
 (require 'init-xterm)
-(require 'init-themes)
+;; (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
 (require 'init-dired)
@@ -595,3 +595,43 @@ There are two things you can do about this warning:
 (setq rtog/goto-buffer-fun 'pop-to-buffer)
 
 (nyan-mode)
+
+(global-set-key [(alt c)] 'kill-ring-save)
+(global-set-key [(alt v)] 'yank)
+(global-set-key [(alt x)] 'kill-region)
+
+(setq mac-command-key-is-meta nil)
+(add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode))
+
+(setq mac-command-modifier 'alt mac-option-modifier 'meta)
+(require 'redo+)
+(require 'mac-key-mode)
+(mac-key-mode 1)
+
+
+(provide 'lsp-tailwindcss)
+;;; lsp-tailwindcss.el ends here
+
+(use-package dired-sidebar
+  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :init
+  (add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode))))
+  :config
+  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+
+  (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-theme 'vscode)
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t))
+
+(defun sidebar-toggle ()
+  "Toggle both `dired-sidebar' and `ibuffer-sidebar'."
+  (interactive)
+  (dired-sidebar-toggle-sidebar)
+  (ibuffer-sidebar-toggle-sidebar))
