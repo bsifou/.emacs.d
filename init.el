@@ -275,7 +275,7 @@
 
 
 
-
+;; (ivy-mode 1)
 
 
 (set-face-attribute 'region nil :background "lightgreen")
@@ -442,7 +442,9 @@
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 
-                                        ;(global-linum-mode 1)
+;;; 1 12 3  4 4                                        ;(global-linum-mode 1)
+
+
 (setq inferior-lisp-program "clojure -A:dev")
 (setq inferior-lisp-program "/usr/local/bin/npx shadow-cljs -d nrepl:0.6.0 -d cider/piggieback:0.4.2 -d cider/cider-nrepl:0.23.0-SNAPSHOT server")
 (setq mac-option-key-is-meta nil)
@@ -596,18 +598,15 @@ There are two things you can do about this warning:
 
 (nyan-mode)
 
-(global-set-key [(alt c)] 'kill-ring-save)
-(global-set-key [(alt v)] 'yank)
-(global-set-key [(alt x)] 'kill-region)
+(global-set-key (kbd "M-c") 'kill-ring-save)
+                                        ;(global-set-key (kbd "M-x") 'clipboard-yank)
+;; (global-set-key [(meta v)] 'yank)
 
 (setq mac-command-key-is-meta nil)
 (add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode))
-
-(setq mac-command-modifier 'alt mac-option-modifier 'meta)
-(require 'redo+)
-(require 'mac-key-mode)
-(mac-key-mode 1)
-
+(setq mac-command-modifier 'meta mac-option-modifier 'alt)
+;; (require 'redo+)
+;; (require 'mac-key-mode)
 
 (provide 'lsp-tailwindcss)
 ;;; lsp-tailwindcss.el ends here
@@ -625,8 +624,9 @@ There are two things you can do about this warning:
   (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
 
-  (setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-theme 'vscode)
+
+
+
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
 
@@ -635,3 +635,16 @@ There are two things you can do about this warning:
   (interactive)
   (dired-sidebar-toggle-sidebar)
   (ibuffer-sidebar-toggle-sidebar))
+
+(global-set-key [(C x) (C k)] 'sidebar-toggle)
+
+;; (setq dired-sidebar-subtree-line-prefix nil)
+;; (scroll-bar-mode 0)
+;; (setq dired-sidebar-theme 'vscode)
+;; (setq dired-sidebar-subtree-line-prefix "__")
+(add-to-list 'default-frame-alist '(scroll-bar-mode . 0))
+
+(customize-set-variable 'scroll-bar-mode nil)
+(customize-set-variable 'horizontal-scroll-bar-mode nil)
+
+
